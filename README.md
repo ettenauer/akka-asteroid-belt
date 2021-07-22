@@ -7,6 +7,8 @@ A asteroid is represented as actor in the akka cluster system. The asteriods are
 If two asteroids are crossing paths, the asteroid with the smaller weight is destroyed and cannot move anymore.
 The state information about the asteroids are visible on a status dashboard (default page) and updated in realtime via signalR. 
 
+In case of a failover the moved asteroid actors are recreated with their inital state since the project doesn't use a persistent storage.
+
 ## What is used?
 * Akka.NET with Clustering: https://getakka.net/articles/clustering/cluster-overview.html
 * Petabridge Cluster Management: https://cmd.petabridge.com/

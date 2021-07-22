@@ -23,7 +23,7 @@ services:
     image: asteroidbelt:dev
     labels:
       com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
-        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteroidBelt.Web.dll"'
+        --additionalProbingPath /root/.nuget/fallbackpackages  ""'
       com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
         dotnet); then kill $$PID; fi"
       com.microsoft.visualstudio.debuggee.program: dotnet
@@ -66,7 +66,7 @@ services:
     image: asteroidbelt:dev
     labels:
       com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
-        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteroidBelt.Web.dll"'
+        --additionalProbingPath /root/.nuget/fallbackpackages  ""'
       com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
         dotnet); then kill $$PID; fi"
       com.microsoft.visualstudio.debuggee.program: dotnet
@@ -108,7 +108,7 @@ services:
     image: asteroidbelt:dev
     labels:
       com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
-        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteroidBelt.Web.dll"'
+        --additionalProbingPath /root/.nuget/fallbackpackages  ""'
       com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
         dotnet); then kill $$PID; fi"
       com.microsoft.visualstudio.debuggee.program: dotnet
