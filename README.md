@@ -21,3 +21,4 @@ The state information about the asteroids are visible on a status dashboard (def
 * browse https://localhost/ to see status dashboard
 
 ## Run project on K8s
+* soon available
