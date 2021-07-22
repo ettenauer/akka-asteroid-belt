@@ -3,30 +3,28 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 
-# should be a comma-delimited list
 ENV CLUSTER_SEEDS "[]"
 ENV CLUSTER_IP ""
 ENV CLUSTER_PORT "4053"
 
+EXPOSE 9110
+EXPOSE 4053
+EXPOSE 80
+EXPOSE 443
+
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["source/AsteriodBelt.Web/AsteriodBelt.Web.csproj", "source/AsteriodBelt.Web/"]
-COPY ["source/AsteriodBelt.Actors/AsteriodBelt.Actors.csproj", "source/AsteriodBelt.Actors/"]
-RUN dotnet restore "source/AsteriodBelt.Web/AsteriodBelt.Web.csproj"
+COPY ["source/AsteroidBelt.Web/AsteroidBelt.Web.csproj", "source/AsteroidBelt.Web/"]
+COPY ["source/AsteroidBelt.Actors/AsteroidBelt.Actors.csproj", "source/AsteroidBelt.Actors/"]
+RUN dotnet restore "source/AsteroidBelt.Web/AsteroidBelt.Web.csproj"
 COPY . .
-WORKDIR "/src/source/AsteriodBelt.Web"
-RUN dotnet build "AsteriodBelt.Web.csproj" -c Release -o /app/build
+WORKDIR "/src/source/AsteroidBelt.Web"
+RUN dotnet build "AsteroidBelt.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AsteriodBelt.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "AsteroidBelt.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-EXPOSE 9110 # 9110 - Petabridge.Cmd
-EXPOSE 4053 # 4053 - Akka.Cluster
-EXPOSe 80
-EXPOSE 443
-
-ENTRYPOINT ["dotnet", "AsteriodBelt.Web.dll"]
+ENTRYPOINT ["dotnet", "AsteroidBelt.Web.dll"]
