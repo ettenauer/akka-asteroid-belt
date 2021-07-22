@@ -3,7 +3,7 @@ Example how to use akka.net with and sharding in containerized setup
 
 ## What does this project?
 The project simulates in a very simple way the movement of asteroids around a gravity pool. 
-A asteroid is represented as actor in the akka cluster system. The asteriods are distributed via shards across avilable nodes in the cluster.
+A asteroid is represented as actor in the akka cluster system. The asteriods are distributed via shards across available nodes in the cluster.
 If two asteroids are crossing paths, the asteroid with the smaller weight is destroyed and cannot move anymore.
 The state information about the asteroids are visible on a status dashboard (default page) and updated in realtime via signalR. 
 
@@ -23,4 +23,7 @@ In case of a failover the moved asteroid actors are recreated with their inital 
 * browse https://localhost/ to see status dashboard
 
 ## Run project on K8s
+* soon available
+
+## Check Akka-Cluster 
 * soon available

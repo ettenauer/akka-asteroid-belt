@@ -32,8 +32,6 @@ namespace AsteroidBelt.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseStaticFiles();
