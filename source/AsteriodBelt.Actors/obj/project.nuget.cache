@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0nHEWc6BnuG4wQvgCNsSKac8DYhCNn4sn4rE/KxY/oobdolulDUCRhBaqPxGSbBBNswrAjZSDP+mpbs2tuMOvQ==",
+  "dgSpecHash": "y7pLhzTMQyh5UQlEM81QQiZ4NF6QFZvPbdPE8xi/I8BWUuRmHGj47hHocykdRy5pXXb17Wta5iChTKMG8/UNCA==",
   "success": true,
-  "projectFilePath": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteriodBelt.Actors.csproj",
+  "projectFilePath": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteroidBelt.Actors.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Etti\\.nuget\\packages\\akka\\1.4.21\\akka.1.4.21.nupkg.sha512",
     "C:\\Users\\Etti\\.nuget\\packages\\akka.cluster\\1.4.21\\akka.cluster.1.4.21.nupkg.sha512",

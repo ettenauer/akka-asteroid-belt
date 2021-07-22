@@ -6595,9 +6595,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteriodBelt.Actors.csproj",
-      "projectName": "AsteriodBelt.Actors",
-      "projectPath": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteriodBelt.Actors.csproj",
+      "projectUniqueName": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteroidBelt.Actors.csproj",
+      "projectName": "AsteroidBelt.Actors",
+      "projectPath": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\AsteroidBelt.Actors.csproj",
       "packagesPath": "C:\\Users\\Etti\\.nuget\\packages\\",
       "outputPath": "D:\\dev\\projects\\akka-asteriod-belt\\source\\AsteriodBelt.Actors\\obj\\",
       "projectStyle": "PackageReference",

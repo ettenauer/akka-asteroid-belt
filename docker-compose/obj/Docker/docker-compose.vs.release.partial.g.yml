@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
   node1:
-    container_name: AsteriodBelt.Web
+    container_name: AsteroidBelt.Web
     build:
       labels:
         com.microsoft.created-by: "visual-studio"
-        com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+        com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     volumes:
       - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -15,17 +15,17 @@ services:
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteriodBelt.Web.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteroidBelt.Web.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
-      com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+      com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     tty: true
   node2:
-    container_name: AsteriodBelt.Web_1
+    container_name: AsteroidBelt.Web_1
     build:
       labels:
         com.microsoft.created-by: "visual-studio"
-        com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+        com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     volumes:
       - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -34,18 +34,18 @@ services:
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteriodBelt.Web.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteroidBelt.Web.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
-      com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+      com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     tty: true
 
   seed:
-    container_name: AsteriodBelt.Web_2
+    container_name: AsteroidBelt.Web_2
     build:
       labels:
         com.microsoft.created-by: "visual-studio"
-        com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+        com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     volumes:
       - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -54,8 +54,8 @@ services:
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteriodBelt.Web.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/AsteroidBelt.Web.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
-      com.microsoft.visual-studio.project-name: "AsteriodBelt.Web"
+      com.microsoft.visual-studio.project-name: "AsteroidBelt.Web"
     tty: true

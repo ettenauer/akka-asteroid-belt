@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   seed:
-    image: ${DOCKER_REGISTRY-}asteriodbelt
+    image: ${DOCKER_REGISTRY-}asteroidbelt
     build:
       context: ../
-      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      dockerfile: source/AsteroidBelt.Web/Dockerfile
     hostname: seed
     ports:
       - '9110:9110'
@@ -15,37 +15,37 @@ services:
     environment:
       CLUSTER_PORT: 4053
       CLUSTER_IP: "seed"
-      CLUSTER_SEEDS: "akka.tcp://asteriodbelt@seed:4053"
+      CLUSTER_SEEDS: "akka.tcp://asteroidbelt@seed:4053"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "https://+:443;http://+:80"
 
   node1:
-    image: ${DOCKER_REGISTRY-}asteriodbelt
+    image: ${DOCKER_REGISTRY-}asteroidbelt
     build:
       context: ../
-      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      dockerfile: source/AsteroidBelt.Web/Dockerfile
     ports:
       - '0:9110'
       - '0:4053'
     environment:
       CLUSTER_PORT: 4053
-      CLUSTER_SEEDS: "akka.tcp://asteriodbelt@seed:4053"
+      CLUSTER_SEEDS: "akka.tcp://asteroidbelt@seed:4053"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "https://+:443;http://+:80"
     depends_on:
       - "seed"
 
   node2:
-    image: ${DOCKER_REGISTRY-}asteriodbelt
+    image: ${DOCKER_REGISTRY-}asteroidbelt
     build:
       context: ../
-      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      dockerfile: source/AsteroidBelt.Web/Dockerfile
     ports:
       - '0:9110'
       - '0:4053'
     environment:
       CLUSTER_PORT: 4053
-      CLUSTER_SEEDS: "akka.tcp://asteriodbelt@seed:4053"
+      CLUSTER_SEEDS: "akka.tcp://asteroidbelt@seed:4053"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "https://+:443;http://+:80"
     depends_on:

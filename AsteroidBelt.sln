@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsteriodBelt.Web", "source\AsteriodBelt.Web\AsteriodBelt.Web.csproj", "{700DEA8E-F31C-4F91-BA10-0157B975A601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsteroidBelt.Web", "source\AsteroidBelt.Web\AsteroidBelt.Web.csproj", "{700DEA8E-F31C-4F91-BA10-0157B975A601}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsteriodBelt.Actors", "source\AsteriodBelt.Actors\AsteriodBelt.Actors.csproj", "{FC4FA972-30ED-4D48-B6C9-B619FF2634A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsteroidBelt.Actors", "source\AsteroidBelt.Actors\AsteroidBelt.Actors.csproj", "{FC4FA972-30ED-4D48-B6C9-B619FF2634A3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{7FAA77EE-3BBA-438D-907B-CE8704A21531}"
 EndProject
