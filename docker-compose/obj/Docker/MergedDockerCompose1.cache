@@ -1,0 +1,134 @@
+services:
+  node1:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AsteriodBelt.Web
+      target: base
+    container_name: AsteriodBelt.Web
+    depends_on:
+      seed:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: asteriodbelt:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteriodBelt.Web.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 0
+      target: 4053
+    - published: 0
+      target: 9110
+    tty: true
+    volumes:
+    - D:\dev\projects\akka-asteriod-belt\source\AsteriodBelt.Web:/app:rw
+    - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Etti\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Etti\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - C:\Users\Etti\.nuget\packages:/root/.nuget/packages:ro
+    - D:\dev\projects\akka-asteriod-belt:/src:rw
+  node2:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AsteriodBelt.Web
+      target: base
+    container_name: AsteriodBelt.Web_1
+    depends_on:
+      seed:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: asteriodbelt:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteriodBelt.Web.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 0
+      target: 4053
+    - published: 0
+      target: 9110
+    tty: true
+    volumes:
+    - D:\dev\projects\akka-asteriod-belt\source\AsteriodBelt.Web:/app:rw
+    - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Etti\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Etti\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - C:\Users\Etti\.nuget\packages:/root/.nuget/packages:ro
+    - D:\dev\projects\akka-asteriod-belt:/src:rw
+  seed:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AsteriodBelt.Web
+      target: base
+    container_name: AsteriodBelt.Web_2
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_IP: seed
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    hostname: seed
+    image: asteriodbelt:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net5.0/AsteriodBelt.Web.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 80
+      target: 80
+    - published: 443
+      target: 443
+    - published: 0
+      target: 4053
+    - published: 9110
+      target: 9110
+    tty: true
+    volumes:
+    - D:\dev\projects\akka-asteriod-belt\source\AsteriodBelt.Web:/app:rw
+    - C:\Users\Etti\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Etti\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Etti\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - C:\Users\Etti\.nuget\packages:/root/.nuget/packages:ro
+    - D:\dev\projects\akka-asteriod-belt:/src:rw
+version: '3.4'

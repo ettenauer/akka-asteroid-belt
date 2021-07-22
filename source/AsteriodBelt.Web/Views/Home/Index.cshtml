@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Status";
+}
+
+<div class="container-fluid" id="status-board">
+    <div id="status-text" class="row"><span style="color:red">Disconnected</span></div>
+</div>
+
+@section Scripts{
+<script src="/lib/signalr/signalr.js"></script>
+<script>
+    $(function () {
+        var channel = new signalR.HubConnectionBuilder().withUrl("/hubs/asteriodHub").build();
+        channel.on("writeState",
+            function (envelope) {
+
+                if ($("#" + envelope.id).length != 0) {
+                    $("#" + envelope.id).remove();
+                }
+
+                $("#status-board").append('<div class="row" id="' + envelope.id + '">' + envelope.message + '</div>');
+            });
+
+        channel.start().then(function () {
+            $('#status-text').html("<span style=\"color: green\">Connected</span>");
+        });
+    });
+</script>
+
+}

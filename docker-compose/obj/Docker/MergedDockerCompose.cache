@@ -1,0 +1,59 @@
+services:
+  node1:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+    depends_on:
+      seed:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+    image: asteriodbelt
+    ports:
+    - published: 0
+      target: 9110
+    - published: 0
+      target: 4053
+  node2:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+    depends_on:
+      seed:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+    image: asteriodbelt
+    ports:
+    - published: 0
+      target: 9110
+    - published: 0
+      target: 4053
+  seed:
+    build:
+      context: D:\dev\projects\akka-asteriod-belt
+      dockerfile: source/AsteriodBelt.Web/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      CLUSTER_IP: seed
+      CLUSTER_PORT: 4053
+      CLUSTER_SEEDS: akka.tcp://asteriodbelt@seed:4053
+    hostname: seed
+    image: asteriodbelt
+    ports:
+    - published: 9110
+      target: 9110
+    - published: 0
+      target: 4053
+    - published: 80
+      target: 80
+    - published: 443
+      target: 443
+version: '3.4'
