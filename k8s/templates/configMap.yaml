@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+data:
+  CLUSTER_IP_SEED: {{ .Values.seedNode.name }}
+  CLUSTER_PORT: "4053"
+  CLUSTER_SEEDS: "akka.tcp://asteroidbelt@{{ .Values.seedNode.name }}:4053"
+  ASPNETCORE_ENVIRONMENT: "Development"
+  ASPNETCORE_URLS: "http://+:80"
+  appsettings.json: |-
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*"
+    }
+  app.conf: |-
+    petabridge.cmd {
+      # default IP address used to listen for incoming petabridge.cmd client connections
+      # should be a safe default as it listens on "all network interfaces".
+      host = "0.0.0.0"
+
+      # default port number used to listen for incoming petabridge.cmd client connections
+      port = 9110
+    }
+    akka {
+      stdout-loglevel = DEBUG
+      loglevel = DEBUG
+      log-config-on-start = on  
+      coordinated-shutdown.exit-clr = on
+      actor {
+        provider = cluster
+        debug {  
+                  receive = off 
+                  autoreceive = off
+                  lifecycle = on
+                  event-stream = off
+                  unhandled = off
+            }
+      }					
+      remote {
+        dot-netty.tcp {
+            hostname = "0.0.0.0"
+            # the values below this comment may be overridden by Akka.Bootstrap.Docker at runtime
+            public-hostname = "localhost"
+            port = 4053
+          }
+      }			
+      cluster {
+        roles = ["gravity","asteroid"]
+        #will inject this node as a self-seed node at run-time
+        # the values below this comment may be overridden by Akka.Bootstrap.Docker at runtime
+        seed-nodes = ["akka.tcp://asteroidbelt@localhost:4053"] 
+        sharding {
+          role = "asteroid"
+          passivate-idle-entity-after = off # set to off for this project 
+        }
+          # is required to mark unreachable as down and allow rebalancing of shards
+        downing-provider-class = "Akka.Cluster.SplitBrainResolver, Akka.Cluster"
+        split-brain-resolver {
+            active-strategy = keep-majority
+          }
+      }
+    } 

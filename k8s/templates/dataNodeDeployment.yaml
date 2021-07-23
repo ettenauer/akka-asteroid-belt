@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.dataNode.name }}
+  labels:
+    {{- include "helm.selectorLabelsDataNode" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.dataNode.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helm.selectorLabelsDataNode" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "helm.selectorLabelsDataNode" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+            - containerPort: 4053
+            - containerPort: 9110
+          volumeMounts:
+          - name: config-file-volume
+            mountPath: /app/appsettings.json # This should be your final destination
+            subPath: appsettings.json  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
+          - name: config-file-volume
+            mountPath: /app/app.conf
+            subPath: app.conf
+          env:
+            - name: CLUSTER_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: CLUSTER_PORT
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.configMap.name }}
+                    key: CLUSTER_PORT
+            - name: CLUSTER_SEEDS
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.configMap.name }}
+                    key: CLUSTER_SEEDS
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.configMap.name }}
+                    key: ASPNETCORE_ENVIRONMENT
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ .Values.configMap.name }}
+                    key: ASPNETCORE_URLS
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: config-file-volume
+          configMap:
+            name: {{ .Values.configMap.name }}
+            items:
+             - key: appsettings.json  
+               path: appsettings.json
+             - key: app.conf  
+               path: app.conf
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}

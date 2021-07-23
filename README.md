@@ -11,7 +11,7 @@ In case of a failover the moved asteroid actors are recreated with their inital 
 
 ## What is used?
 * Akka.NET with Clustering: https://getakka.net/articles/clustering/cluster-overview.html
-* Petabridge Cluster Management: https://cmd.petabridge.com/
+* Petabridge Cluster Management: https://cmd.petabridge.com/ -> used for failover tests
 * Asp.NetCore5: https://github.com/dotnet/aspnetcore
 * Docker-Compose: https://docs.docker.com/compose/
 * K8s: https://kubernetes.io/en/docs/home/
@@ -23,7 +23,11 @@ In case of a failover the moved asteroid actors are recreated with their inital 
 * browse https://localhost/ to see status dashboard
 
 ## Run project on K8s
-* soon available
-
-## Check Akka-Cluster 
-* soon available
+* install K8s and Helm
+* activate ingress controller
+* kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
+* create secret able to access image repository
+* kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username= --docker-password= --namespace=default -o yaml
+* navigate to cloned repository
+* helm install local ./k8s
+* browse http://asteroidbelt.local/  (update hostfile to mapp asteroidbelt.local to 127.0.0.1)

@@ -36,8 +36,6 @@ namespace AsteroidBelt.Web
 
             app.UseStaticFiles();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<AsteroidHub>("/hubs/asteroidHub");

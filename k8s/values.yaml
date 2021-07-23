@@ -1,0 +1,28 @@
+imagePullSecret: "private-docker-registry-cred"
+
+image:
+ repository: ghcr.io/ettenauer/akka-asteroid-belt
+ pullPolicy: Always
+ tag: "main"
+
+configMap:
+  name: "default"
+
+seedNode:
+  name: "seed"
+  replicaCount: 1 
+
+dataNode:
+  name: "data"
+  replicaCount: 2 
+
+ingress:
+ host: asteroidbelt.local
+
+resources:
+  requests:
+   memory: "500Mi"
+   cpu: "50m"
+  limits:
+   memory: "1Gi"
+   cpu: "500m"

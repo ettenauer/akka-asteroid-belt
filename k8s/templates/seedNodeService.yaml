@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.seedNode.name }}
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: akka 
+      port: 4053
+      targetPort: 4053
+      protocol: TCP  
+    - name: petabridge 
+      port: 9110
+      targetPort: 9110
+      protocol: TCP   
+  selector:
+    {{- include "helm.selectorLabelsSeedNode" . | nindent 8 }}
