@@ -30,4 +30,4 @@ In case of a failover the moved asteroid actors are recreated with their inital 
 * kubectl create secret docker-registry private-docker-registry-cred --docker-server=https://ghcr.io --docker-username= --docker-password= --namespace=default -o yaml
 * navigate to cloned repository
 * helm install local ./k8s
-* browse http://asteroidbelt.local/  (update hostfile to mapp asteroidbelt.local to 127.0.0.1)
+* browse http://asteroidbelt.local/  (update hostfile to map asteroidbelt.local to 127.0.0.1)
