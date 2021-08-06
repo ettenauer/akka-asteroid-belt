@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Akka.Bootstrap.Docker" Version="0.5.3" />
-    <PackageReference Include="Akka.Cluster.Sharding" Version="1.4.21" />
+    <PackageReference Include="Akka.Cluster.Sharding" Version="1.4.22" />
     <PackageReference Include="Akka.DependencyInjection" Version="1.4.21" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0-preview.6.21352.12" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0-preview.6.21352.12" />
