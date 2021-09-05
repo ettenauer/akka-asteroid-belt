@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Petabridge.Cmd.Cluster;
 using Petabridge.Cmd.Cluster.Sharding;
 using Petabridge.Cmd.Host;
-using Petabridge.Cmd.Remote;
 
 namespace AsteroidBelt.Web
 {
@@ -75,7 +74,6 @@ namespace AsteroidBelt.Web
             var pbm = PetabridgeCmd.Get(actorSystem);
             pbm.RegisterCommandPalette(ClusterCommands.Instance);
             pbm.RegisterCommandPalette(ClusterShardingCommands.Instance);
-            pbm.RegisterCommandPalette(RemoteCommands.Instance);
             pbm.Start();
 
             return Task.CompletedTask;
