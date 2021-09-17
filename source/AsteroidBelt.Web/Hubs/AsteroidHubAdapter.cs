@@ -2,36 +2,36 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace AsteroidBelt.Web.Hubs
+namespace AsteroidBelt.Web.Hubs;
+
+public class AsteroidHubAdapter
 {
-    public class AsteroidHubAdapter
+    IHubContext<AsteroidHub> hub;
+
+    public AsteroidHubAdapter(IHubContext<AsteroidHub> hub)
     {
-        IHubContext<AsteroidHub> hub;
+        this.hub = hub;
+    }
 
-        public AsteroidHubAdapter(IHubContext<AsteroidHub> hub)
+    public Task PushStateAsync(AsteroidState state)
+    {
+        return WriteMessageAsync(new HubMessageEnvelope
         {
-            this.hub = hub;
-        }
+            Id = state.AsteroidId,
+            Message = $"|ID: {state.AsteroidId} | X: {state.X} | Y: {state.Y} | Weight: {state.Weight} | Destroyed: {state.Destroyed}|"
+        });
+    }
 
-        public Task PushStateAsync(AsteroidState state)
-        {
-            return WriteMessageAsync(new HubMessageEnvelope
-            {
-                Id = state.AsteroidId,
-                Message = $"|ID: {state.AsteroidId} | X: {state.X} | Y: {state.Y} | Weight: {state.Weight} | Destroyed: {state.Destroyed}|"
-            });
-        }
+    private Task WriteMessageAsync(HubMessageEnvelope message)
+    {
+        return hub.Clients.All.SendAsync("writeState", message);
+    }
 
-        private Task WriteMessageAsync(HubMessageEnvelope message)
-        {
-            return hub.Clients.All.SendAsync("writeState", message);
-        }
+    private sealed class HubMessageEnvelope
+    {
+        public string Id { get; init; }
 
-        private sealed class HubMessageEnvelope
-        {
-            public string Id { get; init; }
-
-            public string Message { get; init; }
-        }
+        public string Message { get; init; }
     }
 }
+

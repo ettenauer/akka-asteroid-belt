@@ -10,8 +10,8 @@ services:
     ports:
       - '9110:9110'
       - '0:4053'
-      - '80:80'
-      - '443:443'
+      - '8000:80'
+      - '8001:443'
     environment:
       CLUSTER_PORT: 4053
       CLUSTER_IP: "seed"

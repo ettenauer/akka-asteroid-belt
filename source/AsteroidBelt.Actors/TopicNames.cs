@@ -1,9 +1,9 @@
-﻿namespace AsteroidBelt.Actors
-{
-    public static class TopicNames
-    {
-        public static string GravityForce = "gravityForceTopic";
+﻿namespace AsteroidBelt.Actors;
 
-        public static string AsteriodState = "asteriodStateTopic";
-    }
+public static class TopicNames
+{
+    public static string GravityForce = "gravityForceTopic";
+
+    public static string AsteriodState = "asteriodStateTopic";
 }
+

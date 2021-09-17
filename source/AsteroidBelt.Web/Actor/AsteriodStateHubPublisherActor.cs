@@ -5,44 +5,44 @@ using AsteroidBelt.Actors;
 using AsteroidBelt.Web.Hubs;
 using System;
 
-namespace AsteroidBelt.Web.Actor
+namespace AsteroidBelt.Web.Actor;
+
+public class AsteriodStateHubPublisherActor : ReceiveActor
 {
-    public class AsteriodStateHubPublisherActor : ReceiveActor
+    private readonly ILoggingAdapter logger = Context.GetLogger();
+
+    public AsteriodStateHubPublisherActor(AsteroidHubAdapter hub, IActorRef mediator)
     {
-        private readonly ILoggingAdapter logger = Context.GetLogger();
+        mediator.Tell(new Subscribe(TopicNames.AsteriodState, Self));
 
-        public AsteriodStateHubPublisherActor(AsteroidHubAdapter hub, IActorRef mediator)
+        Receive<SubscribeAck>(ack =>
         {
-            mediator.Tell(new Subscribe(TopicNames.AsteriodState, Self));
-
-            Receive<SubscribeAck>(ack =>
+            if (ack.Subscribe.Topic == TopicNames.AsteriodState
+                && ack.Subscribe.Ref.Equals(Self)
+                && ack.Subscribe.Group == null)
             {
-                if (ack.Subscribe.Topic == TopicNames.AsteriodState
-                    && ack.Subscribe.Ref.Equals(Self)
-                    && ack.Subscribe.Group == null)
-                {
-                    logger.Info($"subscribing asteriod {Self.Path.Name} to topic {ack.Subscribe.Topic}");
-                }
-            });
+                logger.Info($"subscribing asteriod {Self.Path.Name} to topic {ack.Subscribe.Topic}");
+            }
+        });
 
-            Receive<UnsubscribeAck>(ack =>
+        Receive<UnsubscribeAck>(ack =>
+        {
+            logger.Info($"unsubscribing asteriod {Self.Path.Name} from topic {ack.Unsubscribe.Topic}");
+        });
+
+        ReceiveAsync<AsteroidState>(async state =>
+        {
+            try
             {
-                logger.Info($"unsubscribing asteriod {Self.Path.Name} from topic {ack.Unsubscribe.Topic}");
-            });
+                logger.Info($"reiceved state asteriod: {state.AsteroidId} x: {state.X} y: {state.Y}");
 
-            ReceiveAsync<AsteroidState>(async state =>
+                await hub.PushStateAsync(state).ConfigureAwait(false);
+            }
+            catch (Exception ex)
             {
-                try
-                {
-                    logger.Info($"reiceved state asteriod: {state.AsteroidId} x: {state.X} y: {state.Y}");
-
-                    await hub.PushStateAsync(state).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    logger.Error(ex, "Error while writing to hub");
-                }
-            });
-        }
+                logger.Error(ex, "Error while writing to hub");
+            }
+        });
     }
 }
+

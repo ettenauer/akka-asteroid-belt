@@ -1,24 +1,28 @@
-using Microsoft.AspNetCore.Hosting;
+using AsteroidBelt.Web;
+using AsteroidBelt.Web.Hubs;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AsteroidBelt.Web
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.ConfigureLogging((configLogging) => configLogging.AddConsole());
+builder.Services.AddSignalR();
+builder.Services.AddTransient<AsteroidHubAdapter>();
+builder.Services.AddHostedService<AkkaService>();
+builder.Services.AddLogging();
+builder.Services.AddControllersWithViews();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostContext, configLogging) =>
-                {
-                    configLogging.AddConsole();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                { 
-                    webBuilder.UseStartup<Startup>(); 
-                });
-    }
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseRouting();
+app.UseStaticFiles();
+app.MapHub<AsteroidHub>("/hubs/asteroidHub");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+
+await app.RunAsync().ConfigureAwait(false);
