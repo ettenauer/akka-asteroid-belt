@@ -1,5 +1,5 @@
 # akka-asteroid-belt
-Example how to use akka.net with and sharding in containerized setup
+Example how to use akka.net with sharding in containerized setup
 
 ## What does this project?
 The project simulates in a very simple way the movement of asteroids around a gravity pool. 
@@ -12,7 +12,7 @@ In case of a failover the moved asteroid actors are recreated with their inital 
 ## What is used?
 * Akka.NET with Clustering: https://getakka.net/articles/clustering/cluster-overview.html
 * Petabridge Cluster Management: https://cmd.petabridge.com/ -> used for failover tests
-* Asp.NetCore5: https://github.com/dotnet/aspnetcore
+* Asp.NetCore6: https://github.com/dotnet/aspnetcore
 * Docker-Compose: https://docs.docker.com/compose/
 * K8s: https://kubernetes.io/en/docs/home/
 
