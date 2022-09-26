@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0-preview.7.22375.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0-preview.7.22375.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="Petabridge.Cmd.Cluster" Version="1.1.0" />
+    <PackageReference Include="Petabridge.Cmd.Cluster" Version="1.1.1" />
     <PackageReference Include="Petabridge.Cmd.Cluster.Sharding" Version="1.1.0" />
     <PackageReference Include="Petabridge.Cmd.Host" Version="1.1.0" />
     <PackageReference Include="Petabridge.Cmd.Remote" Version="1.1.0" />
