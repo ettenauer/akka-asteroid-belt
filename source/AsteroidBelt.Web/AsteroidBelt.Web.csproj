@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Akka.Bootstrap.Docker" Version="0.5.3" />
-    <PackageReference Include="Akka.DependencyInjection" Version="1.4.40" />
+    <PackageReference Include="Akka.DependencyInjection" Version="1.4.44" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0-preview.7.22375.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0-preview.7.22375.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
