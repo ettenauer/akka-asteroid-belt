@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Petabridge.Cmd.Cluster" Version="1.1.0" />
     <PackageReference Include="Petabridge.Cmd.Cluster.Sharding" Version="1.1.0" />
-    <PackageReference Include="Petabridge.Cmd.Host" Version="1.1.0" />
+    <PackageReference Include="Petabridge.Cmd.Host" Version="1.2.0" />
     <PackageReference Include="Petabridge.Cmd.Remote" Version="1.1.0" />
   </ItemGroup>
 
